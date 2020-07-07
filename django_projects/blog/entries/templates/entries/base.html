@@ -19,7 +19,9 @@
   <link href="{% static 'entries/css/blog-home.css '%}" rel="stylesheet">
 
 </head>
-
+<br/>
+<br/>
+<br/>
 <body>
 
   <!-- Navigation -->
@@ -32,32 +34,39 @@
       <div class="collapse navbar-collapse" id="navbarResponsive">
         <ul class="navbar-nav ml-auto">
           <li class="nav-item active">
-            <a class="nav-link" href="#">Home
-              <span class="sr-only">(current)</span>
-            </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">About</a>
+            <a class="nav-link" href="{% url 'create_entry' %}">Post Now</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">Services</a>
+            <a class="nav-link" href="{% url 'register' %}">Create Account</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">Contact</a>
+            <a class="nav-link" href="{% url 'logout' %}">Log Out</a>
           </li>
         </ul>
       </div>
     </div>
   </nav>
-  <br/>
-  <br/>
-  <br/>
+
   <!-- Page Content -->
   <div class="container">
 
     <div class="row">
-
       {% block content %} {% endblock %}
+      <div class = "card my-4">
+        <h4 class = "card-header text-center">Logged in Information</h4>
+        <div class = "card-body">
+          <ul class = "list-unstyled mb-0">
+            <li>
+              <p> <strong>Username:</strong> {{user.username}}</p>
+            </li>
+            <li>
+              <p> <strong>Email:</strong> {{user.email}}</p>
+            </li>
+          </ul>
+        </div>
+      </div>
     </div>
     <!-- /.row -->
 
