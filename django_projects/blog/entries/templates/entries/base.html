@@ -10,18 +10,15 @@
   <meta name="description" content="">
   <meta name="author" content="">
 
-  <title>Blog Home - Start Bootstrap Template</title>
+  <title>Yonggyu's Blog</title>
 
   <!-- Bootstrap core CSS -->
   <link href="{% static 'entries/vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
 
   <!-- Custom styles for this template -->
-  <link href="{% static 'entries/css/blog-home.css '%}" rel="stylesheet">
+  <link href="{% static 'entries/css/blog-home.css' %}" rel="stylesheet">
 
 </head>
-<br/>
-<br/>
-<br/>
 <body>
 
   <!-- Navigation -->
@@ -35,15 +32,24 @@
         <ul class="navbar-nav ml-auto">
           <li class="nav-item active">
           </li>
+          {% if user.is_authenticated %}
           <li class="nav-item">
             <a class="nav-link" href="{% url 'create_entry' %}">Post Now</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="{% url 'register' %}">Create Account</a>
+            <form method="post" action="{% url 'logout' %}" class="form-inline">
+              {% csrf_token %}
+              <button type="submit" class="btn btn-link nav-link">Log Out</button>
+            </form>
+          </li>
+          {% else %}
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'login' %}">Log In</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="{% url 'logout' %}">Log Out</a>
+            <a class="nav-link" href="{% url 'register' %}">Create Account</a>
           </li>
+          {% endif %}
         </ul>
       </div>
     </div>
@@ -54,6 +60,7 @@
 
     <div class="row">
       {% block content %} {% endblock %}
+      {% if user.is_authenticated %}
       <div class = "card my-4">
         <h4 class = "card-header text-center">Logged in Information</h4>
         <div class = "card-body">
@@ -67,6 +74,7 @@
           </ul>
         </div>
       </div>
+      {% endif %}
     </div>
     <!-- /.row -->
 
@@ -76,7 +84,7 @@
   <!-- Footer -->
   <footer class="py-5 bg-dark">
     <div class="container">
-      <p class="m-0 text-center text-white">Copyright &copy; Your Website 2020</p>
+      <p class="m-0 text-center text-white">Copyright &copy; Yonggyu Song</p>
     </div>
     <!-- /.container -->
   </footer>
